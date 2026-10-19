@@ -6,7 +6,7 @@ import { env } from "./config/env.js";
 const startServer = async (): Promise<void> => {
   try {
     await connectDB();
-    await connectRedis();
+    // await connectRedis();
     app.listen(env.PORT, () => {
       console.log(`Server running in ${env.NODE_ENV} mode on port ${env.PORT}`);
     });
