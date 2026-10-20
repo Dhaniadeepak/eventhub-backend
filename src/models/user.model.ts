@@ -10,7 +10,7 @@ export interface IUser {
   role: Role;
   avatar?: string;
   isVerified: boolean;
-  refreshToken?: string; // sha256 HASH of the refresh token
+  refreshToken?: string; 
   createdAt: Date;
   updatedAt: Date;
 }
@@ -44,7 +44,6 @@ const userSchema = new Schema<IUser, UserModel, IUserMethods>(
   { timestamps: true }
 );
 
-// Hash the password only when it was changed
 userSchema.pre("save", async function () {
   if (!this.isModified("password")) return;
   this.password = await bcrypt.hash(this.password, 12);
