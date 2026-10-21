@@ -33,3 +33,8 @@ export const verifyRefreshToken = (token: string): TokenPayload =>
 
 export const hashToken = (token: string): string =>
   crypto.createHash("sha256").update(token).digest("hex");
+
+export const generateRandomToken = (): { raw: string; hashed: string } => {
+  const raw = crypto.randomBytes(32).toString("hex");
+  return { raw, hashed: hashToken(raw) };
+};

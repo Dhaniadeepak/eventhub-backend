@@ -10,9 +10,13 @@ export interface IUser {
   role: Role;
   avatar?: string;
   isVerified: boolean;
-  refreshToken?: string; 
+  refreshToken?: string;
   createdAt: Date;
   updatedAt: Date;
+  emailVerificationToken?: string;
+  emailVerificationExpires?: Date;
+  passwordResetToken?: string;
+  passwordResetExpires?: Date;
 }
 
 export interface IUserMethods {
@@ -40,8 +44,12 @@ const userSchema = new Schema<IUser, UserModel, IUserMethods>(
     avatar: { type: String },
     isVerified: { type: Boolean, default: false },
     refreshToken: { type: String, select: false },
+    emailVerificationToken: { type: String, select: false },
+    emailVerificationExpires: { type: Date, select: false },
+    passwordResetToken: { type: String, select: false },
+    passwordResetExpires: { type: Date, select: false },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 userSchema.pre("save", async function () {
